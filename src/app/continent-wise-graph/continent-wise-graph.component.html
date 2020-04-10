@@ -1,0 +1,55 @@
+<h1 class="h1">Region Wise Stats</h1>
+<div class="row mt-5">
+  <div class="col-3 text-left">
+    <div class="form-group">
+      <label>Select Region</label>
+      <select
+        class="form form-control"
+        [(ngModel)]="selectedRegion"
+        (change)="onChangeRegion()"
+      >
+        <option *ngFor="let r of regionList" [value]="r">{{
+          r | titlecase
+        }}</option>
+      </select>
+    </div>
+    <div class="form-group" *ngIf="!selectedDisplay">
+      <label>Select Parameter</label>
+      <select
+        class="form form-control"
+        [(ngModel)]="selectedParam"
+        (change)="onChangeParam()"
+      >
+        <option *ngFor="let param of paramList" [value]="param">{{
+          param | titlecase
+        }}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Display as</label>
+      <select
+        class="form form-control"
+        [(ngModel)]="selectedDisplay"
+        (change)="onChangeDisplay()"
+      >
+        <option *ngFor="let dt of displayTypes; let i = index" [ngValue]="i">{{
+          dt | titlecase
+        }}</option>
+      </select>
+    </div>
+  </div>
+  <div class="col-8 text-center">
+    <app-chart-maker
+      *ngIf="!selectedDisplay"
+      [chartType]="chartType"
+      [chartData]="chartData"
+      [chartOptions]="chartOptions"
+    ></app-chart-maker>
+    <app-table-maker
+      *ngIf="selectedDisplay"
+      [cols]="cols"
+      [finalArrayToDisplay]="recordsForTable"
+      [totalRecords]="recordsForTable.length"
+    ></app-table-maker>
+  </div>
+</div>

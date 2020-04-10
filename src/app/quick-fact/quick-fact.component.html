@@ -1,0 +1,37 @@
+<div class="row">
+  <div class="col text-center">
+    <h1>Quick Facts</h1>
+    <blockquote class="blockquote">
+      <p class="mb-0 text-warning">
+        {{ totalConfirmCases | number }}
+      </p>
+      <footer class="blockquote-footer">
+        <cite title="Source Title h5">Total Confirm Cases</cite>
+      </footer>
+    </blockquote>
+    <blockquote class="blockquote">
+      <p class="mb-0 text-success">
+        {{ totalRecoverCases | number }}
+      </p>
+      <footer class="blockquote-footer">
+        <cite title="Source Title h5">Total Recover Cases</cite>
+      </footer>
+    </blockquote>
+    <blockquote class="blockquote">
+      <p class="mb-0 text-danger">
+        {{ totalDeathCases | number }}
+      </p>
+      <footer class="blockquote-footer">
+        <cite title="Source Title h5">Total Death Cases</cite>
+      </footer>
+    </blockquote>
+    <blockquote class="blockquote">
+      <p class="mb-0">
+        {{ totalDeathCases / totalConfirmCases | percent }}
+      </p>
+      <footer class="blockquote-footer">
+        <cite title="Source Title h5">Total Mortality Rate</cite>
+      </footer>
+    </blockquote>
+  </div>
+</div>

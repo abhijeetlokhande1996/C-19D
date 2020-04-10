@@ -1,0 +1,54 @@
+<div class="row">
+  <div class="col">
+    <h1>World Covid-19 Stats</h1>
+    <p-table
+      [columns]="cols"
+      [value]="finalArrayToDisplay"
+      sortMode="multiple"
+      [paginator]="true"
+      [rows]="10"
+      [responsive]="true"
+      autoLayout="true"
+      [totalRecords]="totalRecords"
+      #dt
+    >
+      <ng-template pTemplate="caption">
+        <div style="text-align: right;">
+          <i class="pi pi-search" style="margin: 4px 4px 0 0;"></i>
+          <input
+            type="text"
+            pInputText
+            size="50"
+            placeholder="Global Filter"
+            (input)="dt.filterGlobal($event.target.value, 'contains')"
+            style="width: auto;"
+          />
+        </div>
+      </ng-template>
+      <ng-template pTemplate="header" let-columns>
+        <tr>
+          <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+            {{ col.header }}
+            <p-sortIcon [field]="col.field"></p-sortIcon>
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-user let-columns="columns">
+        <tr>
+          <td *ngFor="let col of columns">
+            <ng-container
+              *ngIf="col.field == 'countryName' || col.field == 'mortalityRate'"
+            >
+              {{ user[col.field] }}
+            </ng-container>
+            <ng-container
+              *ngIf="col.field != 'countryName' && col.field != 'mortalityRate'"
+            >
+              {{ user[col.field] | number }}
+            </ng-container>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>
