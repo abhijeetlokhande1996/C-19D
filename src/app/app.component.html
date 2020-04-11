@@ -25,3 +25,30 @@
     </div>
   </div>
 </div>
+<button
+  *ngIf="isShow"
+  id="myBtn"
+  title="Go to top"
+  class="btn btn-success"
+  (click)="gotoTop()"
+>
+  Top
+</button>
+
+<div class="row">
+  <div class="col"></div>
+  <div class="col">
+    <a
+      href="https://www.hitwebcounter.com"
+      target="_blank"
+      style="visibility: hidden;"
+    >
+      <img
+        src="https://hitwebcounter.com/counter/counter.php?page=7228160&style=0005&nbdigits=5&type=page&initCount=0"
+        title="User Stats"
+        Alt="PHP Hits Count"
+      />
+    </a>
+  </div>
+  <div class="col"></div>
+</div>

@@ -1,4 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
-body.ui-paginator.ui-paginator-pages {
-  vertical-align: inherit;
+
+body {
+  overflow-x: scroll;
 }
