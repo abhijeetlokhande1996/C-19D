@@ -18,6 +18,7 @@ export interface DataForTable {
   styleUrls: ['./continent-wise-graph.component.css'],
 })
 export class ContinentWiseStatComponent implements OnInit {
+  displayFlag = false;
   regionList = [];
   finalDataShow = {};
   selectedRegion: string = null;
@@ -90,13 +91,43 @@ export class ContinentWiseStatComponent implements OnInit {
           this.selectedRegion = this.regionList[0];
 
           if (!this.selectedDisplay) {
-            this.generateChartData(
-              'line',
-              this.finalDataShow[this.selectedRegion],
-              this.selectedParam
-            );
+            try {
+              this.generateChartData(
+                'line',
+                this.finalDataShow[this.selectedRegion],
+                this.selectedParam
+              );
+              this.displayFlag = true;
+            } catch {
+              try {
+                setTimeout(() => {
+                  this.generateChartData(
+                    'line',
+                    this.finalDataShow[this.selectedRegion],
+                    this.selectedParam
+                  );
+                }, 500);
+                this.displayFlag = true;
+              } catch {
+                this.displayFlag = false;
+              }
+            }
           } else {
-            this.generateTableData(this.finalDataShow[this.selectedRegion]);
+            try {
+              this.generateTableData(this.finalDataShow[this.selectedRegion]);
+              this.displayFlag = true;
+            } catch {
+              try {
+                setTimeout(() => {
+                  this.generateTableData(
+                    this.finalDataShow[this.selectedRegion]
+                  );
+                }, 500);
+                this.displayFlag = true;
+              } catch {
+                this.displayFlag = false;
+              }
+            }
           }
         });
     });

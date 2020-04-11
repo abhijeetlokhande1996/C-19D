@@ -24,6 +24,7 @@ import * as world from 'fusioncharts/maps/fusioncharts.world';
 import * as india from 'fusioncharts/maps/fusioncharts.india';
 
 import * as usa from 'fusioncharts/maps/fusioncharts.usa';
+import { AppScrollTopComponent } from './app-scroll-top/app-scroll-top.component';
 
 FusionChartsModule.fcRoot(FusionCharts, charts, FusionTheme, world, india, usa);
 
@@ -36,6 +37,7 @@ FusionChartsModule.fcRoot(FusionCharts, charts, FusionTheme, world, india, usa);
     ChartMakerComponent,
     TableMakerComponent,
     IndiaStatComponent,
+    AppScrollTopComponent,
   ],
   imports: [
     BrowserModule,
