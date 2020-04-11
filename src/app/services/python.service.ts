@@ -15,4 +15,7 @@ export class PythonService {
   getCountryRegionMappingData() {
     return this.http.get(`${this.url}/getCountryRegionMapping`);
   }
+  getIndiaStat() {
+    return this.http.get(`https://api.rootnet.in/covid19-in/stats/latest`);
+  }
 }

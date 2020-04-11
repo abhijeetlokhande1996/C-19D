@@ -21,7 +21,7 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.pythonService
       .getAggredatedData()
-      .pipe(take(1))
+
       .subscribe((aggData) => {
         const covidDataModel = new CovidData();
         covidDataModel.aggData = aggData;
@@ -30,10 +30,11 @@ export class AppComponent implements OnInit {
       });
     this.pythonService
       .getCountryRegionMappingData()
-      .pipe(take(1))
+
       .subscribe((data) => {
         const model = new ContinentCountryMapping();
         model.mapping = data;
+
         this.continentCountryService.setContinentCountryModel(model);
       });
   }
