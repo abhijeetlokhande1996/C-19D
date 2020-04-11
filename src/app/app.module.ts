@@ -23,7 +23,9 @@ import * as FusionTheme from 'fusioncharts/themes/fusioncharts.theme.fusion';
 import * as world from 'fusioncharts/maps/fusioncharts.world';
 import * as india from 'fusioncharts/maps/fusioncharts.india';
 
-FusionChartsModule.fcRoot(FusionCharts, charts, FusionTheme, world, india);
+import * as usa from 'fusioncharts/maps/fusioncharts.usa';
+
+FusionChartsModule.fcRoot(FusionCharts, charts, FusionTheme, world, india, usa);
 
 @NgModule({
   declarations: [

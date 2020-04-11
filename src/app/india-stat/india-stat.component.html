@@ -12,6 +12,12 @@
           dt | titlecase
         }}</option>
       </select>
+      <span
+        class="help-block text-success mt-2 font-italic"
+        *ngIf="!selectedDisplay"
+        >On map only confirmed cases are shown but on hover you can get full
+        details.</span
+      >
     </div>
   </div>
   <div class="col-10">
