@@ -96,7 +96,7 @@ export class ContinentWiseStatComponent implements OnInit {
               this.selectedParam
             );
           } else {
-            // call to table
+            this.generateTableData(this.finalDataShow[this.selectedRegion]);
           }
         });
     });

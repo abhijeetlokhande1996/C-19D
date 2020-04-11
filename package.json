@@ -9,7 +9,8 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "prod": "ng build --prod --base-href=/Covid19Dashboard/",
-    "dev": "ng build  --base-href=/Covid19Dashboard/"
+    "dev": "ng build  --base-href=/Covid19Dashboard/",
+    "publish": "ng build --prod  --base-href=https://abhijeetlokhande1996.github.io/C-19D/ && angular-cli-ghpages -d dist/Covid19Dashboard/ --no-silent"
   },
   "private": true,
   "dependencies": {
