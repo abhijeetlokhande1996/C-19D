@@ -11,6 +11,7 @@ export class QuickFactComponent implements OnInit {
   totalConfirmCases: number = 0;
   totalRecoverCases: number = 0;
   totalDeathCases: number = 0;
+  totalCriticalCases: number = 0;
   constructor(private covidDataService: CovidDataService) {}
 
   ngOnInit(): void {
@@ -20,6 +21,7 @@ export class QuickFactComponent implements OnInit {
         this.totalConfirmCases += covidData.aggData[countryName]['confirmed'];
         this.totalRecoverCases += covidData.aggData[countryName]['recovered'];
         this.totalDeathCases += covidData.aggData[countryName]['deaths'];
+        this.totalCriticalCases += covidData.aggData[countryName]['critical'];
       });
     });
   }
