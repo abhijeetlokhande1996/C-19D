@@ -28,7 +28,7 @@ export class ContinentWiseStatComponent implements OnInit {
   paramList = ['confirmed', 'recovered', 'deaths'];
   displayTypes = ['graph', 'table'];
   selectedParam = this.paramList[0];
-  selectedDisplay: number = 0;
+  selectedDisplay: number = 1;
 
   recordsForTable = [];
   totalRecordsOfTable: number = 0;

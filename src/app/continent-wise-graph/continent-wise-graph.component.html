@@ -1,6 +1,6 @@
 <h1 class="h1">Region Wise Stats</h1>
 <div class="row mt-5">
-  <div class="col-2 text-left">
+  <div class="col-md-2 col-sm-12 text-left">
     <div class="form-group">
       <label>Select Region</label>
       <select
@@ -38,7 +38,7 @@
       </select>
     </div>
   </div>
-  <div class="col-10 text-center">
+  <div class="col-md-10 col-sm-12 text-center">
     <app-chart-maker
       *ngIf="!selectedDisplay"
       [chartType]="chartType"
