@@ -1,0 +1,37 @@
+<h1 class="h1">Covid-19 Stats of India</h1>
+<div class="row">
+  <div class="col-2">
+    <div class="form-group">
+      <label>Display as</label>
+      <select
+        class="form-control"
+        [(ngModel)]="selectedDisplay"
+        (change)="onChangeDisplay()"
+      >
+        <option *ngFor="let dt of displayType; let i = index" [ngValue]="i">{{
+          dt | titlecase
+        }}</option>
+      </select>
+    </div>
+  </div>
+  <div class="col-10">
+    <app-table-maker
+      *ngIf="selectedDisplay"
+      [cols]="cols"
+      [finalArrayToDisplay]="recordsToDispplay"
+      [totalRecords]="recordsToDispplay.length"
+    ></app-table-maker>
+
+    <!--
+      India Map
+    -->
+
+    <fusioncharts
+      *ngIf="!selectedDisplay"
+      width="1000"
+      height="1000"
+      type="india"
+      [dataSource]="dataSource"
+    ></fusioncharts>
+  </div>
+</div>

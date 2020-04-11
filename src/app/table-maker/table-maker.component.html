@@ -34,12 +34,20 @@
     <tr>
       <td *ngFor="let col of columns">
         <ng-container
-          *ngIf="col.field == 'countryName' || col.field == 'mortalityRate'"
+          *ngIf="
+            col.field == 'countryName' ||
+            col.field == 'mortalityRate' ||
+            col.field == 'stateName'
+          "
         >
           {{ user[col.field] }}
         </ng-container>
         <ng-container
-          *ngIf="col.field != 'countryName' && col.field != 'mortalityRate'"
+          *ngIf="
+            col.field != 'countryName' &&
+            col.field != 'mortalityRate' &&
+            col.field !== 'stateName'
+          "
         >
           {{ user[col.field] | number }}
         </ng-container>
