@@ -14,6 +14,7 @@ import { ContinentCountryService } from './services/continent-country.service';
 import { ContinentCountryMapping } from './models/continent-country-mapping';
 import { PageScrollService } from 'ngx-page-scroll-core';
 import { DOCUMENT } from '@angular/common';
+import { IndiaDataService } from './services/india-data.service';
 
 @Component({
   selector: 'app-root',
@@ -29,12 +30,16 @@ export class AppComponent implements OnInit {
     private pythonService: PythonService,
     private covidDataService: CovidDataService,
     private continentCountryService: ContinentCountryService,
-    private pageScrollService: PageScrollService,
-    @Inject(DOCUMENT) private document: any
+    private indiaDatasService: IndiaDataService
   ) {}
 
   ngOnInit(): void {
     // this.pythonService.incrementCount();
+    this.pythonService.getIndianStateAndDistrictWiseData().subscribe((data) => {
+      console.error('D Data ----');
+      console.log(data);
+      this.indiaDatasService.setIndiaData(data);
+    });
     this.pythonService
       .getAggredatedData()
 

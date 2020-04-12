@@ -32,4 +32,9 @@ export class PythonService {
       }
     );
   }
+  getStateAndDistrictWiseData() {
+    return this.http.get(
+      'https://api.covid19india.org/v2/state_district_wise.json'
+    );
+  }
 }

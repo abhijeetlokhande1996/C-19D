@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PythonService } from '../services/python.service';
 import { take } from 'rxjs/operators';
+import { IndiaDataService } from '../services/india-data.service';
 
 @Component({
   selector: 'app-india-stat',
@@ -15,7 +16,10 @@ export class IndiaStatComponent implements OnInit {
   indianData = {};
   dataSource: Object = {};
 
-  constructor(private pythonService: PythonService) {}
+  constructor(
+    private pythonService: PythonService,
+    private indiaDataSerive: IndiaDataService
+  ) {}
 
   ngOnInit(): void {
     this.cols = [
@@ -44,11 +48,8 @@ export class IndiaStatComponent implements OnInit {
         header: 'Mortality Rate',
       },
     ];
-    this.pythonService
-      .getIndianStateAndDistrictWiseData()
-      .pipe(take(1))
-      .subscribe((data) => {
-        console.dir(data);
+    this.indiaDataSerive.getIndiaData().subscribe((data) => {
+      if (Object.keys(data).length > 0) {
         const finalData = {};
         finalData['data'] = {};
         finalData['data']['regional'] = [];
@@ -71,7 +72,8 @@ export class IndiaStatComponent implements OnInit {
         } else {
           this.generateIndianChart(this.indianData);
         }
-      });
+      }
+    });
   }
   onChangeDisplay() {
     if (this.selectedDisplay) {
