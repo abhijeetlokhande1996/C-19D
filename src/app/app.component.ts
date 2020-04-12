@@ -1,10 +1,20 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  HostListener,
+  ElementRef,
+  ViewChild,
+  Inject,
+} from '@angular/core';
 import { PythonService } from './services/python.service';
 import { take } from 'rxjs/operators';
 import { CovidDataService } from './services/covid-data.service';
 import { CovidData } from './models/covid-data';
 import { ContinentCountryService } from './services/continent-country.service';
 import { ContinentCountryMapping } from './models/continent-country-mapping';
+import { PageScrollService } from 'ngx-page-scroll-core';
+import { DOCUMENT } from '@angular/common';
+import { IndiaDataService } from './services/india-data.service';
 
 @Component({
   selector: 'app-root',
@@ -15,14 +25,21 @@ export class AppComponent implements OnInit {
   title = 'Covid19Dashboard';
   isShow: boolean;
   topPosToStartShowing = 100;
+
   constructor(
     private pythonService: PythonService,
     private covidDataService: CovidDataService,
-    private continentCountryService: ContinentCountryService
+    private continentCountryService: ContinentCountryService,
+    private indiaDatasService: IndiaDataService
   ) {}
 
   ngOnInit(): void {
-    this.pythonService.incrementCount();
+    // this.pythonService.incrementCount();
+    this.pythonService.getIndianStateAndDistrictWiseData().subscribe((data) => {
+      console.error('D Data ----');
+      console.log(data);
+      this.indiaDatasService.setIndiaData(data);
+    });
     this.pythonService
       .getAggredatedData()
 
@@ -60,6 +77,7 @@ export class AppComponent implements OnInit {
     }
   }
 
+  getIdFromTopNavBar(id: string) {}
   // TODO: Cross browsing
   gotoTop() {
     window.scroll({

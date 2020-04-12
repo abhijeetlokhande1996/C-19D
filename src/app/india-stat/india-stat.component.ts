@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PythonService } from '../services/python.service';
 import { take } from 'rxjs/operators';
+import { IndiaDataService } from '../services/india-data.service';
 
 @Component({
   selector: 'app-india-stat',
@@ -8,14 +9,17 @@ import { take } from 'rxjs/operators';
   styleUrls: ['./india-stat.component.css'],
 })
 export class IndiaStatComponent implements OnInit {
-  selectedDisplay: number = 0;
+  selectedDisplay: number = 1;
   displayType = ['graph', 'table'];
   cols = [];
   recordsToDispplay = [];
   indianData = {};
   dataSource: Object = {};
 
-  constructor(private pythonService: PythonService) {}
+  constructor(
+    private pythonService: PythonService,
+    private indiaDataSerive: IndiaDataService
+  ) {}
 
   ngOnInit(): void {
     this.cols = [
@@ -26,6 +30,10 @@ export class IndiaStatComponent implements OnInit {
       {
         field: 'confirmed',
         header: 'Confirmed',
+      },
+      {
+        field: 'active',
+        header: 'Active',
       },
       {
         field: 'recovered',
@@ -40,19 +48,32 @@ export class IndiaStatComponent implements OnInit {
         header: 'Mortality Rate',
       },
     ];
-    this.pythonService
-      .getIndiaStat()
-      .pipe(take(1))
-      .subscribe((data) => {
-        if (data['success']) {
-          this.indianData = data;
-          if (this.selectedDisplay) {
-            this.generateDataForTable(data);
-          } else {
-            this.generateIndianChart(this.indianData);
-          }
+    this.indiaDataSerive.getIndiaData().subscribe((data) => {
+      if (Object.keys(data).length > 0) {
+        const finalData = {};
+        finalData['data'] = {};
+        finalData['data']['regional'] = [];
+        const stateListSorted: Array<string> = Object.keys(
+          data['state_wise']
+        ).sort();
+        stateListSorted.forEach((stateName) => {
+          const objToPush = {};
+          objToPush['loc'] = stateName;
+          objToPush['totalConfirmed'] =
+            data['state_wise'][stateName]['confirmed'];
+          objToPush['discharged'] = data['state_wise'][stateName]['recovered'];
+          objToPush['deaths'] = data['state_wise'][stateName]['deaths'];
+          objToPush['active'] = data['state_wise'][stateName]['active'];
+          finalData['data']['regional'].push(objToPush);
+        });
+        this.indianData = finalData;
+        if (this.selectedDisplay) {
+          this.generateDataForTable(this.indianData);
+        } else {
+          this.generateIndianChart(this.indianData);
         }
-      });
+      }
+    });
   }
   onChangeDisplay() {
     if (this.selectedDisplay) {
@@ -69,14 +90,16 @@ export class IndiaStatComponent implements OnInit {
     for (const item of mainData) {
       let mRate = (item['deaths'] / item['totalConfirmed']) * 100;
       mRate = Math.round(mRate);
-      if (!item['totalConfirmed']) {
+      if (!item['totalConfirmed'] || Number.isNaN(mRate)) {
         mRate = 0;
       }
+
       this.recordsToDispplay.push({
         stateName: item['loc'],
         confirmed: item['totalConfirmed'],
         recovered: item['discharged'],
         deaths: item['deaths'],
+        active: item['active'],
         mortalityRate: mRate + '%',
       });
     } // for
@@ -145,11 +168,12 @@ export class IndiaStatComponent implements OnInit {
       }
       let stateName: string = this.titleCase(item['loc']);
       const confirmed = item['totalConfirmed'];
+      const active = item['active'];
 
       dataset.push({
         id: stateAndIdMapping[stateName],
         value: confirmed,
-        tooltext: `Confirmed : ${confirmed} {br} Recovered: ${item['discharged']} {br} Deaths: ${item['deaths']}`,
+        tooltext: `Confirmed : ${confirmed} {br} Active : ${active} {br} Recovered: ${item['discharged']} {br} Deaths: ${item['deaths']}`,
       });
     }
 

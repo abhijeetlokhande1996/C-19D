@@ -27,6 +27,8 @@
     "bootstrap": "^4.4.1",
     "chart.js": "^2.9.3",
     "fusioncharts": "^3.15.1-sr.1",
+    "ngx-page-scroll": "^7.0.1",
+    "ngx-page-scroll-core": "^7.0.1",
     "primeicons": "^2.0.0",
     "primeng": "^9.0.5",
     "rxjs": "~6.5.4",

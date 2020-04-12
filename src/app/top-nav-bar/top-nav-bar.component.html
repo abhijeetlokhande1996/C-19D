@@ -1,0 +1,44 @@
+<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+  <a href="#" class="navbar-brand">Covid-19 Stats</a>
+  <button
+    type="button"
+    class="navbar-toggler"
+    data-toggle="collapse"
+    data-target="#navbarCollapse"
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarCollapse">
+    <div class="navbar-nav">
+      <a
+        href="#world"
+        class="nav-item nav-link"
+        id="world"
+        (click)="onClickLink('world')"
+        >World Covid-19 Stats</a
+      >
+      <a
+        href="#region"
+        class="nav-item nav-link"
+        id="region"
+        (click)="onClickLink('region')"
+        >Regional Covid-19 Stats</a
+      >
+      <a
+        href="#india"
+        class="nav-item nav-link"
+        id="india"
+        (click)="onClickLink('india')"
+        >India Covid-19 Stats(State Wise)</a
+      >
+      <a
+        href="#india_district"
+        class="nav-item nav-link"
+        id="india_district"
+        (click)="onClickLink('india_district')"
+        >India Covid-19 Stats(District Wise)</a
+      >
+    </div>
+  </div>
+</nav>
