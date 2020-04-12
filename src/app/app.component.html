@@ -1,12 +1,35 @@
-<div class="jumbotron">
+<!-- <div class="jumbotron">
   <h1>Covid-19 Quick Stats</h1>
   <p class="Source Title ml-5">
     Designed & Developed by <span class="text-success">Abhijeet Lokhande</span>
   </p>
-</div>
+</div> -->
+<nav class="navbar navbar-expand-md bg-dark navbar-dark fixed-top">
+  <a href="#" class="navbar-brand">Covid-19 Stats</a>
+  <button
+    type="button"
+    class="navbar-toggler"
+    data-toggle="collapse"
+    data-target="#navbarCollapse"
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
 
-<div class="container-fluid">
-  <div class="row">
+  <div class="collapse navbar-collapse" id="navbarCollapse">
+    <div class="navbar-nav">
+      <a href="#world" class="nav-item nav-link">World Covid-19 Stats</a>
+      <a href="#region" class="nav-item nav-link">Regional Covid-19 Stats</a>
+      <a href="#india" class="nav-item nav-link"
+        >India Covid-19 Stats(State Wise)</a
+      >
+      <a href="#india_district" class="nav-item nav-link"
+        >India Covid-19 Stats(District Wise)</a
+      >
+    </div>
+  </div>
+</nav>
+<div class="container-fluid" style="margin-top: 80px;">
+  <div class="row" id="world">
     <div class="col-md-4 col-sm-12">
       <app-quick-fact></app-quick-fact>
     </div>
@@ -14,14 +37,20 @@
       <app-world-stat></app-world-stat>
     </div>
   </div>
-  <div class="row mt-5 ml-2">
+  <div class="row mt-5 ml-2" id="region">
     <div class="col-md-12 col-sm-12">
       <app-continent-wise-stat></app-continent-wise-stat>
     </div>
   </div>
-  <div class="row mt-5 ml-2">
+  <div class="row mt-5 ml-2" id="india">
     <div class="col-md-12 col-sm-12">
       <app-india-stat></app-india-stat>
+    </div>
+  </div>
+
+  <div class="row mt-5 ml-2" id="india_district">
+    <div class="col-md-12 col-sm-12">
+      <app-india-district></app-india-district>
     </div>
   </div>
 </div>

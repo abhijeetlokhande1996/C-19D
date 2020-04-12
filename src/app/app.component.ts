@@ -1,10 +1,19 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  HostListener,
+  ElementRef,
+  ViewChild,
+  Inject,
+} from '@angular/core';
 import { PythonService } from './services/python.service';
 import { take } from 'rxjs/operators';
 import { CovidDataService } from './services/covid-data.service';
 import { CovidData } from './models/covid-data';
 import { ContinentCountryService } from './services/continent-country.service';
 import { ContinentCountryMapping } from './models/continent-country-mapping';
+import { PageScrollService } from 'ngx-page-scroll-core';
+import { DOCUMENT } from '@angular/common';
 
 @Component({
   selector: 'app-root',
@@ -15,10 +24,13 @@ export class AppComponent implements OnInit {
   title = 'Covid19Dashboard';
   isShow: boolean;
   topPosToStartShowing = 100;
+
   constructor(
     private pythonService: PythonService,
     private covidDataService: CovidDataService,
-    private continentCountryService: ContinentCountryService
+    private continentCountryService: ContinentCountryService,
+    private pageScrollService: PageScrollService,
+    @Inject(DOCUMENT) private document: any
   ) {}
 
   ngOnInit(): void {
@@ -60,6 +72,7 @@ export class AppComponent implements OnInit {
     }
   }
 
+  getIdFromTopNavBar(id: string) {}
   // TODO: Cross browsing
   gotoTop() {
     window.scroll({
