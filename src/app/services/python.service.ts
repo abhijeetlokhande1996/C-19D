@@ -8,7 +8,9 @@ import configJson from './../../assets/config.json';
 export class PythonService {
   url = configJson.pythonUrl;
   constructor(private http: HttpClient) {}
-
+  incrementCount() {
+    this.http.get(`${this.url}`).subscribe();
+  }
   getAggredatedData() {
     return this.http.get(`${this.url}/getAggregatedCsv`);
   }
