@@ -20,4 +20,16 @@ export class PythonService {
   getIndiaStat() {
     return this.http.get(`https://api.rootnet.in/covid19-in/stats/latest`);
   }
+  getIndianStateAndDistrictWiseData() {
+    return this.http.get(
+      `https://corona-virus-world-and-india-data.p.rapidapi.com/api_india`,
+      {
+        headers: {
+          'x-rapidapi-host': 'corona-virus-world-and-india-data.p.rapidapi.com',
+          'x-rapidapi-key':
+            '297c7f49b8mshbe42867157733dap15a767jsn6d9220c33424',
+        },
+      }
+    );
+  }
 }

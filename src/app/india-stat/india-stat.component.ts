@@ -28,6 +28,10 @@ export class IndiaStatComponent implements OnInit {
         header: 'Confirmed',
       },
       {
+        field: 'active',
+        header: 'Active',
+      },
+      {
         field: 'recovered',
         header: 'Recovered',
       },
@@ -41,16 +45,31 @@ export class IndiaStatComponent implements OnInit {
       },
     ];
     this.pythonService
-      .getIndiaStat()
+      .getIndianStateAndDistrictWiseData()
       .pipe(take(1))
       .subscribe((data) => {
-        if (data['success']) {
-          this.indianData = data;
-          if (this.selectedDisplay) {
-            this.generateDataForTable(data);
-          } else {
-            this.generateIndianChart(this.indianData);
-          }
+        console.dir(data);
+        const finalData = {};
+        finalData['data'] = {};
+        finalData['data']['regional'] = [];
+        const stateListSorted: Array<string> = Object.keys(
+          data['state_wise']
+        ).sort();
+        stateListSorted.forEach((stateName) => {
+          const objToPush = {};
+          objToPush['loc'] = stateName;
+          objToPush['totalConfirmed'] =
+            data['state_wise'][stateName]['confirmed'];
+          objToPush['discharged'] = data['state_wise'][stateName]['recovered'];
+          objToPush['deaths'] = data['state_wise'][stateName]['deaths'];
+          objToPush['active'] = data['state_wise'][stateName]['active'];
+          finalData['data']['regional'].push(objToPush);
+        });
+        this.indianData = finalData;
+        if (this.selectedDisplay) {
+          this.generateDataForTable(this.indianData);
+        } else {
+          this.generateIndianChart(this.indianData);
         }
       });
   }
@@ -69,14 +88,16 @@ export class IndiaStatComponent implements OnInit {
     for (const item of mainData) {
       let mRate = (item['deaths'] / item['totalConfirmed']) * 100;
       mRate = Math.round(mRate);
-      if (!item['totalConfirmed']) {
+      if (!item['totalConfirmed'] || Number.isNaN(mRate)) {
         mRate = 0;
       }
+
       this.recordsToDispplay.push({
         stateName: item['loc'],
         confirmed: item['totalConfirmed'],
         recovered: item['discharged'],
         deaths: item['deaths'],
+        active: item['active'],
         mortalityRate: mRate + '%',
       });
     } // for
@@ -145,11 +166,12 @@ export class IndiaStatComponent implements OnInit {
       }
       let stateName: string = this.titleCase(item['loc']);
       const confirmed = item['totalConfirmed'];
+      const active = item['active'];
 
       dataset.push({
         id: stateAndIdMapping[stateName],
         value: confirmed,
-        tooltext: `Confirmed : ${confirmed} {br} Recovered: ${item['discharged']} {br} Deaths: ${item['deaths']}`,
+        tooltext: `Confirmed : ${confirmed} {br} Active : ${active} {br} Recovered: ${item['discharged']} {br} Deaths: ${item['deaths']}`,
       });
     }
 
