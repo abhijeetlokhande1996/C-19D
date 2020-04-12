@@ -195,6 +195,5 @@ export class IndiaStatComponent implements OnInit {
       // Source data as JSON --> id represents countries of the world.
       data: dataset,
     }; // end of this.dataSource
-    console.log(this.dataSource);
   } // end
 }

@@ -26,7 +26,7 @@ export class ContinentWiseStatComponent implements OnInit {
   chartType;
   chartOptions;
 
-  paramList = ['confirmed', 'recovered', 'deaths'];
+  paramList = ['confirmed', 'recovered', 'deaths', 'critical'];
   displayTypes = ['graph', 'table'];
   selectedParam = this.paramList[0];
   selectedDisplay: number = 1;
@@ -57,37 +57,54 @@ export class ContinentWiseStatComponent implements OnInit {
         header: 'Deaths',
       },
       {
+        field: 'critical',
+        header: 'Critical',
+      },
+      {
         field: 'mortalityRate',
         header: 'Mortality Rate',
       },
     ];
     this.covidDataService.getCovidData().subscribe((dataC: CovidData) => {
+      console.error(dataC);
       this.ccmService
         .getContinentCountryModel()
         .subscribe((regionCountry: ContinentCountryMapping) => {
-          const fCountries: Array<string> = Object.keys(dataC.aggData);
-
+          // const fCountries: Array<string> = Object.keys(dataC.aggData);
+          this.finalDataShow = [];
+          console.log(regionCountry.mapping);
           Object.keys(regionCountry.mapping).forEach((rName) => {
             const countryList: Array<string> = regionCountry.mapping[rName];
+            if (!this.finalDataShow[rName]) {
+              this.finalDataShow[rName] = [];
+            }
 
             for (const countryName of countryList) {
-              for (const fCountry of fCountries) {
-                if (countryName.toLowerCase() == fCountry.toLowerCase()) {
-                  if (!this.finalDataShow[rName]) {
-                    this.finalDataShow[rName] = [];
-                  }
-                  this.finalDataShow[rName].push({
-                    countryName: fCountry,
-                    confirmed: dataC.aggData[fCountry]['confirmed'],
-                    recovered: dataC.aggData[fCountry]['recovered'],
-                    deaths: dataC.aggData[fCountry]['deaths'],
-                  });
-                }
+              if (dataC.aggData[countryName]) {
+                this.finalDataShow[rName].push({
+                  countryName: countryName,
+                  confirmed: dataC.aggData[countryName]['confirmed'],
+
+                  recovered: dataC.aggData[countryName]['recovered'],
+
+                  critical: dataC.aggData[countryName]['critical'],
+
+                  deaths: dataC.aggData[countryName]['deaths'],
+                });
+              } else {
+                this.finalDataShow[rName].push({
+                  countryName: countryName,
+                  confirmed: 0,
+                  recovered: 0,
+                  deaths: 0,
+                  critical: 0,
+                });
               }
             }
           });
 
           this.regionList = Object.keys(this.finalDataShow);
+          console.log(this.finalDataShow);
           this.selectedRegion = this.regionList[0];
 
           if (!this.selectedDisplay) {
@@ -175,12 +192,16 @@ export class ContinentWiseStatComponent implements OnInit {
           (item['confirmed'] + item['recovered'] + item['deaths'])) *
         100;
       mRate = Math.floor(mRate);
+      if (Number.isNaN(mRate)) {
+        mRate = 0;
+      }
 
       this.recordsForTable.push({
         countryName: item['countryName'],
         confirmed: item['confirmed'],
         recovered: item['recovered'],
         deaths: item['deaths'],
+        critical: item['critical'],
         mortalityRate: mRate + '%',
       });
     }

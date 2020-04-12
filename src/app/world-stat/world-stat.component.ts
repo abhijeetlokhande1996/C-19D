@@ -49,6 +49,10 @@ export class WorldStatComponent implements OnInit, OnDestroy {
         header: 'Deaths',
       },
       {
+        field: 'critical',
+        header: 'Critical',
+      },
+      {
         field: 'mortalityRate',
         header: 'Mortality Rate',
       },
@@ -63,15 +67,21 @@ export class WorldStatComponent implements OnInit, OnDestroy {
             (data[countryName]['deaths'] /
               (data[countryName]['confirmed'] +
                 data[countryName]['recovered'] +
-                data[countryName]['deaths'])) *
+                data[countryName]['deaths'] +
+                data[countryName]['critical'])) *
             100;
+          if (Number.isNaN(mRate)) {
+            mRate = 0;
+          }
           mRate = Math.floor(mRate);
+
           this.finalArrayToDisplay.push({
             id: idx + 1,
             countryName: countryName,
             confirmed: data[countryName]['confirmed'],
             recovered: data[countryName]['recovered'],
             deaths: data[countryName]['deaths'],
+            critical: data[countryName]['critical'],
             mortalityRate: mRate + '%',
           });
         });
