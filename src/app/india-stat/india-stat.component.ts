@@ -8,7 +8,7 @@ import { take } from 'rxjs/operators';
   styleUrls: ['./india-stat.component.css'],
 })
 export class IndiaStatComponent implements OnInit {
-  selectedDisplay: number = 0;
+  selectedDisplay: number = 1;
   displayType = ['graph', 'table'];
   cols = [];
   recordsToDispplay = [];
