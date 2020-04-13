@@ -19,6 +19,9 @@
       <a href="#india_district" class="nav-item nav-link"
         >India Covid-19 Stats(District Wise)</a
       >
+      <a href="#world_map" class="nav-item nav-link">
+        World Map (Covid-19 Stats)
+      </a>
     </div>
   </div>
 </nav>
@@ -47,7 +50,14 @@
       <app-india-district></app-india-district>
     </div>
   </div>
+
+  <div class="row mt-5 ml-2" id="world_map">
+    <div class="col-md-12 col-sm-12">
+      <app-world-map></app-world-map>
+    </div>
+  </div>
 </div>
+
 <button
   *ngIf="isShow"
   id="myBtn"
