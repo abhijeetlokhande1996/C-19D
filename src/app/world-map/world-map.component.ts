@@ -34,7 +34,7 @@ export class WorldMapComponent implements OnInit {
           this.dataset.push({
             id: this.countryIdMapping[countryName],
             value: confirmed,
-            tooltext: `Confirmed : ${confirmed} {br}  Recovered: ${recovered} {br} Critical: ${critical} {br} Deaths: ${deaths}`,
+            tooltext: `Country: ${countryName} {br} Confirmed : ${confirmed} {br}  Recovered: ${recovered} {br} Critical: ${critical} {br} Deaths: ${deaths}`,
           });
         });
 
@@ -64,12 +64,12 @@ export class WorldMapComponent implements OnInit {
 
         this.dataSource = {
           chart: {
-            caption: 'State Wise Stats',
+            caption: 'Country Wise Stats',
             theme: 'fusion',
             formatNumberScale: '0',
             thousandSeparator: ',',
             thousandSeparatorPosition: '2,3',
-            showLabels: '1',
+            showLabels: '0',
             useSNameInLabels: '0',
             labelSepChar: ': ',
             includeValueInLabels: '1',
