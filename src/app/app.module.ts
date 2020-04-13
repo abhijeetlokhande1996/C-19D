@@ -28,6 +28,7 @@ import { AppScrollTopComponent } from './app-scroll-top/app-scroll-top.component
 import { TopNavBarComponent } from './top-nav-bar/top-nav-bar.component';
 import { IndiaDistrictComponent } from './india-district/india-district.component';
 import { NgxPageScrollCoreModule } from 'ngx-page-scroll-core';
+import { WorldMapComponent } from './world-map/world-map.component';
 
 FusionChartsModule.fcRoot(FusionCharts, charts, FusionTheme, world, india, usa);
 
@@ -43,6 +44,7 @@ FusionChartsModule.fcRoot(FusionCharts, charts, FusionTheme, world, india, usa);
     AppScrollTopComponent,
     TopNavBarComponent,
     IndiaDistrictComponent,
+    WorldMapComponent,
   ],
   imports: [
     BrowserModule,
