@@ -22,15 +22,25 @@ import * as charts from 'fusioncharts/fusioncharts.charts';
 import * as FusionTheme from 'fusioncharts/themes/fusioncharts.theme.fusion';
 import * as world from 'fusioncharts/maps/fusioncharts.world';
 import * as india from 'fusioncharts/maps/fusioncharts.india';
-
 import * as usa from 'fusioncharts/maps/fusioncharts.usa';
+
+import * as worldwithcountries from 'fusioncharts/maps/fusioncharts.worldwithcountries';
+
 import { AppScrollTopComponent } from './app-scroll-top/app-scroll-top.component';
 import { TopNavBarComponent } from './top-nav-bar/top-nav-bar.component';
 import { IndiaDistrictComponent } from './india-district/india-district.component';
 import { NgxPageScrollCoreModule } from 'ngx-page-scroll-core';
 import { WorldMapComponent } from './world-map/world-map.component';
 
-FusionChartsModule.fcRoot(FusionCharts, charts, FusionTheme, world, india, usa);
+FusionChartsModule.fcRoot(
+  FusionCharts,
+  charts,
+  FusionTheme,
+  world,
+  india,
+  usa,
+  worldwithcountries
+);
 
 @NgModule({
   declarations: [

@@ -34,10 +34,8 @@ export class AppComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // this.pythonService.incrementCount();
+    this.pythonService.incrementCount();
     this.pythonService.getIndianStateAndDistrictWiseData().subscribe((data) => {
-      console.error('D Data ----');
-      console.log(data);
       this.indiaDatasService.setIndiaData(data);
     });
     this.pythonService
