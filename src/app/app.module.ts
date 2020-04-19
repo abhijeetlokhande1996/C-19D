@@ -31,6 +31,7 @@ import { TopNavBarComponent } from './top-nav-bar/top-nav-bar.component';
 import { IndiaDistrictComponent } from './india-district/india-district.component';
 import { NgxPageScrollCoreModule } from 'ngx-page-scroll-core';
 import { WorldMapComponent } from './world-map/world-map.component';
+import { ForecastTableComponent } from './forecast-table/forecast-table.component';
 
 FusionChartsModule.fcRoot(
   FusionCharts,
@@ -55,6 +56,7 @@ FusionChartsModule.fcRoot(
     TopNavBarComponent,
     IndiaDistrictComponent,
     WorldMapComponent,
+    ForecastTableComponent,
   ],
   imports: [
     BrowserModule,

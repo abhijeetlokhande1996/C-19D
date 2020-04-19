@@ -1,0 +1,17 @@
+<div class="row">
+  <div class="col-md-2"></div>
+  <div class="col-md-8 col-sm-12">
+    <p class="h3">Next 5 Days Daily New Confirmed Cases In India - Forecast</p>
+    <table class="table table-bordered">
+      <tr>
+        <th>Date</th>
+        <th>New Confirmed Cases</th>
+      </tr>
+      <tr *ngFor="let item of forecastArr">
+        <th>{{ item[0] | date: "dd-MMM-yyyy" }}</th>
+        <th>{{ item[1] | number: "1.0-0" }}</th>
+      </tr>
+    </table>
+  </div>
+  <div class="col-md-2 col-sm-4"></div>
+</div>
