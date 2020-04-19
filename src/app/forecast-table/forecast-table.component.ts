@@ -6,9 +6,21 @@ import forecast from './../../assets/forecast.json';
   styleUrls: ['./forecast-table.component.css'],
 })
 export class ForecastTableComponent implements OnInit {
+  forecastArr = [];
   constructor() {}
 
   ngOnInit(): void {
-    console.log(forecast);
+    Object.keys(forecast).forEach((key: string) => {
+      const keySplit: Array<string> = key.split('-');
+      const day = parseInt(keySplit[0]);
+      const month = parseInt(keySplit[1]);
+      const year = parseInt(keySplit[2]);
+
+      this.forecastArr.push([
+        new Date(year, month, day).toString(),
+        forecast[key],
+      ]);
+    });
+    console.log(this.forecastArr);
   }
 }
